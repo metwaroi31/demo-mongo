@@ -7,7 +7,6 @@ const Video = require('./model');
 router.post('/image', upload.array('files', 100), async (req, res) => {
    try {
         // Create a new Video object with the uploaded video details
-        console.log(req.body)
         const returnImages = [];
         // multiple file
         req.files.forEach(async (file) => {
@@ -15,8 +14,8 @@ router.post('/image', upload.array('files', 100), async (req, res) => {
             video.url = file.location;
             video.fileName = file.originalname;
             video.title = file.originalname;
+            video.storageName = file.key;
             const savedVideo = await video.save();
-            console.log(savedVideo)
             returnImages.push(savedVideo)
         });        
         // Save the video to the database
