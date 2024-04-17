@@ -31,4 +31,8 @@ router.post('/image', upload.array('files', 100), async (req, res) => {
     }
 });
 
+router.get('/images', async (req, res) => {
+    res.json(await Video.find({}))
+})
+
 module.exports = router
